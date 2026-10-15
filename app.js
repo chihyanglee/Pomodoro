@@ -5,6 +5,7 @@
   const THEMES = ['clean', 'linear', 'falling', 'grayscale'];
   const DIGIT_MOTION = ['falling', 'grayscale'];   // themes that animate digit changes
   const STYLES = ['digital', 'ring', 'bar'];
+  const BAR_SEGMENTS = 24;                           // matches the segment lines in style.css
   const LIMITS = { focus: [1, 180], break: [1, 60] };
   const DEFAULTS = { focus: 25, break: 5, theme: 'clean', style: 'digital' };
   const THEME_COLOR = { clean: '#F7F7F8', linear: '#08090A', falling: '#120E1F', grayscale: '#111111' };
@@ -354,7 +355,8 @@
       clockEl.replaceChildren(...clockCells);
       clockEl.classList.toggle('is-long', text.length > 5);
     }
-    const animate = DIGIT_MOTION.includes(root.dataset.theme) && !reduceMotion.matches;
+    // LCD digits just switch segments, whatever the theme
+    const animate = DIGIT_MOTION.includes(root.dataset.theme) && stage.dataset.style !== 'bar' && !reduceMotion.matches;
     [...text].forEach((ch, i) => setGlyph(clockCells[i], ch, animate));
   }
 
@@ -369,7 +371,8 @@
     const frac = timer.durationMs ? timer.remainingMs / timer.durationMs : 0;
     ringEl.style.strokeDashoffset = String(100 - frac * 100);
     ringEl.style.opacity = frac > 0.001 ? '' : '0';   // a round cap would leave a dot at 0
-    barEl.style.transform = `scaleX(${frac})`;
+    // the LCD bar drops one whole segment at a time
+    barEl.style.transform = `scaleX(${Math.ceil(frac * BAR_SEGMENTS) / BAR_SEGMENTS})`;
 
     const isFocus = timer.phase === 'focus';
     const label = isFocus ? 'Focus' : 'Break';
