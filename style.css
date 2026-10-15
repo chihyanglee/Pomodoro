@@ -1,0 +1,1069 @@
+/* =========================================================
+   TOKENS
+   Type: 16px base, 1.25 ratio → 12 / 14 / 16 / 20 / 25.
+   Space: 4 / 8 / 12 / 16 / 24 / 32 / 48 / 64 — nothing else.
+   Radius: two values per theme (sm = controls, lg = the card).
+   Accent: spent on 3 things only — primary button, selected
+   option, timer progress. Everything else is neutral.
+   ========================================================= */
+:root {
+  --fs-xs: 12px;
+  --fs-sm: 14px;
+  --fs-md: 16px;
+  --fs-lg: 20px;
+  --fs-xl: 25px;
+
+  --s-1: 4px;
+  --s-2: 8px;
+  --s-3: 12px;
+  --s-4: 16px;
+  --s-5: 24px;
+  --s-6: 32px;
+  --s-7: 48px;
+  --s-8: 64px;
+
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --dur: 160ms;
+}
+
+/* 1. Clean — Minimalist SaaS. Off-white page, white card, ink text,
+      one tomato accent. Quiet hairlines, soft two-layer shadow. */
+:root,
+[data-theme="clean"] {
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --clock-font: var(--font);
+  --bg: #F7F7F8;
+  --page-glow: none;
+  --card-bg: #FFFFFF;
+  --card-blur: none;
+  --card-shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 16px 40px -12px rgba(16, 24, 40, .12);
+  --surface-2: #F4F4F5;
+  --border: #E4E4E7;
+  --border-strong: #D4D4D8;
+  --text: #18181B;
+  --text-muted: #63636E;            /* 5.9:1 on white */
+  --accent: #CE2C31;                /* white text 5.2:1 */
+  --accent-hover: #B4262A;
+  --accent-text: #FFFFFF;
+  --accent-soft: rgba(206, 44, 49, .08);
+  --focus: rgba(206, 44, 49, .35);
+  --mark: var(--accent);
+  --radius-sm: 8px;
+  --radius-lg: 16px;
+  --clock-weight: 600;
+  --clock-color: var(--text);
+  --clock-fill: none;
+  --clock-shadow: none;
+  --digit-w: .64em;
+  --ring-stroke: var(--accent);
+  --ring-glow: none;
+  --bar-fill: var(--accent);
+  --track: #EBEBED;
+}
+
+/* 2. Midnight — Linear-inspired dark enterprise. Near-black canvas,
+      8% white hairlines, indigo accent, top light-leak, gradient type. */
+[data-theme="linear"] {
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --clock-font: var(--font);
+  --bg: #08090A;
+  --page-glow: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(94, 106, 210, .22), transparent 70%);
+  --card-bg: linear-gradient(180deg, #131417 0%, #0D0E10 100%);
+  --card-blur: none;
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, .05), 0 24px 64px -16px rgba(0, 0, 0, .6);
+  --surface-2: #17181B;
+  --border: rgba(255, 255, 255, .08);
+  --border-strong: rgba(255, 255, 255, .16);
+  --text: #F7F8F8;
+  --text-muted: #8A8F98;            /* 6.1:1 on #0D0E10 */
+  --accent: #5E6AD2;                /* white text 4.7:1 */
+  --accent-hover: #6E79DB;
+  --accent-text: #FFFFFF;
+  --accent-soft: rgba(94, 106, 210, .14);
+  --focus: rgba(124, 134, 232, .55);
+  --mark: linear-gradient(135deg, #8B93EA, #4C55B8);
+  --radius-sm: 6px;
+  --radius-lg: 12px;
+  --clock-weight: 500;
+  --clock-color: transparent;
+  --clock-fill: linear-gradient(180deg, #FFFFFF 25%, rgba(255, 255, 255, .45) 120%);
+  --clock-shadow: none;
+  --digit-w: .64em;
+  --ring-stroke: var(--accent);
+  --ring-glow: drop-shadow(0 0 10px rgba(94, 106, 210, .55));
+  --bar-fill: linear-gradient(90deg, #4C55B8, #8B93EA);
+  --track: rgba(255, 255, 255, .07);
+}
+
+/* 3. Falling Colors — dark aubergine sky, colored shapes drifting down
+      (canvas), frosted-glass card. White is the "accent" because the
+      background already carries all the color. */
+[data-theme="falling"] {
+  --font: "Outfit", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --clock-font: var(--font);
+  --bg: #120E1F;
+  --page-glow: linear-gradient(180deg, #1C1532 0%, #0F0B19 100%);
+  --card-bg: rgba(24, 18, 42, .62);
+  --card-blur: blur(18px) saturate(150%);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, .08), 0 24px 64px -16px rgba(0, 0, 0, .55);
+  --surface-2: rgba(255, 255, 255, .07);
+  --border: rgba(255, 255, 255, .14);
+  --border-strong: rgba(255, 255, 255, .28);
+  --text: #FFFFFF;
+  --text-muted: rgba(255, 255, 255, .74);
+  --accent: #FFFFFF;
+  --accent-hover: #EDE7FF;
+  --accent-text: #160F28;
+  --accent-soft: rgba(255, 255, 255, .16);
+  --focus: rgba(255, 224, 102, .7);
+  --mark: conic-gradient(#FF6B6B, #FFB84D, #FFE066, #6BCB77, #4D96FF, #9B7BFF, #FF7AC6, #FF6B6B);
+  --radius-sm: 12px;
+  --radius-lg: 24px;
+  --clock-weight: 700;
+  --clock-color: #FFFFFF;
+  --clock-fill: none;
+  --clock-shadow: 0 4px 40px rgba(10, 6, 22, .55);
+  --digit-w: .66em;
+  --ring-stroke: url(#spectrum);
+  --ring-glow: none;
+  --bar-fill: linear-gradient(90deg, #FF6B6B, #FFB84D, #FFE066, #6BCB77, #4D96FF, #9B7BFF);
+  --track: rgba(255, 255, 255, .12);
+}
+
+/* 4. Grayscale — cinematic monochrome. Charcoal, film grain, slow
+      drifting light, a serif display face. Zero hue anywhere; the
+      "accent" is simply the lightest gray. */
+[data-theme="grayscale"] {
+  --font: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --clock-font: "Instrument Serif", Georgia, "Times New Roman", serif;
+  --bg: #111111;
+  --page-glow: radial-gradient(ellipse 70% 45% at 50% 0%, rgba(255, 255, 255, .07), transparent 70%);
+  --card-bg: rgba(26, 26, 26, .72);
+  --card-blur: blur(16px);
+  --card-shadow: inset 0 1px 0 rgba(255, 255, 255, .06), 0 24px 64px -16px rgba(0, 0, 0, .7);
+  --surface-2: rgba(255, 255, 255, .05);
+  --border: rgba(255, 255, 255, .10);
+  --border-strong: rgba(255, 255, 255, .24);
+  --text: #F2F2F2;
+  --text-muted: #9B9B9B;            /* 6.2:1 on #1A1A1A */
+  --accent: #E8E8E8;
+  --accent-hover: #FFFFFF;
+  --accent-text: #111111;           /* 15:1 */
+  --accent-soft: rgba(255, 255, 255, .07);
+  --focus: rgba(255, 255, 255, .45);
+  --mark: conic-gradient(#FFFFFF, #7A7A7A, #262626, #7A7A7A, #FFFFFF);
+  --radius-sm: 10px;
+  --radius-lg: 20px;
+  --clock-weight: 400;
+  --clock-color: #F2F2F2;
+  --clock-fill: none;
+  --clock-shadow: 0 0 40px rgba(255, 255, 255, .08);
+  --digit-w: .48em;
+  --colon-w: .26em;
+  --clock-scale: 1.3;              /* narrow serif digits read small */
+  --ring-stroke: #F2F2F2;
+  --ring-glow: drop-shadow(0 0 6px rgba(255, 255, 255, .35));
+  --bar-fill: linear-gradient(90deg, #4A4A4A, #F2F2F2);
+  --track: rgba(255, 255, 255, .08);
+}
+
+/* =========================================================
+   BASE
+   ========================================================= */
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+[hidden] { display: none !important; }
+
+/* Theme switch: the new theme is revealed by a growing circle from the
+   picked option (JS animates the clip-path on the View Transition).
+   No crossfade, and per-element transitions are off while it runs so
+   the revealed side is already fully in the new theme. */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+.theme-swap *,
+.theme-swap *::before,
+.theme-swap *::after { transition: none !important; }
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  font-family: var(--font);
+  font-size: var(--fs-md);
+  line-height: 1.5;
+  color: var(--text);
+  background-color: var(--bg);
+  background-image: var(--page-glow);
+  background-attachment: fixed;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 240ms var(--ease), color 240ms var(--ease);
+}
+
+h1, p { margin: 0; }
+
+button, input { font: inherit; color: inherit; }
+
+kbd {
+  font-family: inherit;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  padding: 0 var(--s-1);
+  border: 1px solid var(--border);
+  border-bottom-width: 2px;
+  border-radius: 4px;
+  color: var(--text);
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+#falling {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  display: none;
+}
+[data-theme="falling"] #falling { display: block; }
+
+.fx { display: none; }
+
+/* =========================================================
+   SETUP
+   ========================================================= */
+.setup {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--s-7) var(--s-4);
+}
+
+.card {
+  width: 100%;
+  max-width: 560px;
+  padding: var(--s-6);
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  -webkit-backdrop-filter: var(--card-blur);
+  backdrop-filter: var(--card-blur);
+  display: grid;
+  gap: var(--s-6);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--s-3);
+}
+.brand-mark {
+  flex: none;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--mark);
+}
+.brand h1 {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  letter-spacing: -.01em;
+  line-height: 1.25;
+}
+.lede {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+/* fieldset reset — float the legend so its margin behaves */
+.group {
+  border: 0;
+  margin: 0;
+  padding: 0;
+  min-width: 0;
+}
+.group legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-bottom: var(--s-3);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text);
+}
+.group legend + * { clear: both; }
+
+/* ---- Duration ---- */
+.durations {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--s-4);
+}
+.field {
+  display: grid;
+  gap: var(--s-2);
+  min-width: 0;
+}
+.field label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+.input-wrap { position: relative; }
+.input-wrap input {
+  width: 100%;
+  height: 48px;
+  padding: 0 var(--s-7) 0 var(--s-4);
+  font-size: var(--fs-lg);
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  outline: none;
+  appearance: textfield;
+  -moz-appearance: textfield;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.input-wrap input::-webkit-outer-spin-button,
+.input-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.input-wrap input:hover { border-color: var(--border-strong); }
+.input-wrap input:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--focus);
+}
+.input-wrap input[aria-invalid="true"] {
+  border-color: #E5484D;
+  box-shadow: 0 0 0 3px rgba(229, 72, 77, .25);
+}
+.unit {
+  position: absolute;
+  right: var(--s-4);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.chips {
+  display: flex;
+  gap: var(--s-2);
+}
+.chip {
+  flex: 1;
+  height: 32px;
+  padding: 0 var(--s-2);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-muted);
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: background-color var(--dur) var(--ease), color var(--dur) var(--ease), border-color var(--dur) var(--ease);
+}
+.chip:hover { color: var(--text); border-color: var(--border-strong); }
+.chip[aria-pressed="true"] {
+  color: var(--text);
+  background: var(--surface-2);
+  border-color: var(--border-strong);
+}
+
+.error {
+  margin-top: var(--s-3);
+  font-size: var(--fs-sm);
+  color: #E5484D;
+}
+[data-theme="linear"] .error,
+[data-theme="falling"] .error,
+[data-theme="grayscale"] .error { color: #FF8589; }
+
+/* ---- Option cards (radio) ---- */
+.options {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--s-3);
+}
+/* 4 themes → 2×2, swatch beside the text so nothing wraps */
+.options-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.options-4 .option-body {
+  grid-template-columns: 96px 1fr;
+  align-items: center;
+  padding: var(--s-2);
+}
+.option { position: relative; cursor: pointer; }
+.option input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+.option-body {
+  height: 100%;
+  display: grid;
+  gap: var(--s-3);
+  align-content: start;
+  padding: var(--s-2) var(--s-2) var(--s-3);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: transparent;
+  transition: border-color var(--dur) var(--ease), box-shadow var(--dur) var(--ease), background-color var(--dur) var(--ease);
+}
+.option:hover .option-body { border-color: var(--border-strong); }
+.option input:checked + .option-body {
+  border-color: var(--accent);
+  box-shadow: inset 0 0 0 1px var(--accent);
+  background: var(--accent-soft);
+}
+.option input:focus-visible + .option-body {
+  box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 3px var(--focus);
+}
+.option-text {
+  display: grid;
+  gap: 0;
+  padding: 0 var(--s-1);
+}
+.option-title {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  line-height: 1.4;
+}
+.option-sub {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+/* preview tiles */
+.preview {
+  display: grid;
+  place-items: center;
+  aspect-ratio: 16 / 10;
+  border-radius: calc(var(--radius-sm) - 2px);
+  background: var(--surface-2);
+  color: var(--text);
+  overflow: hidden;
+}
+.preview svg { width: 100%; height: 100%; display: block; }
+.pv-text { font-family: var(--font); font-size: 15px; font-weight: 600; fill: currentColor; }
+.pv-text-sm { font-size: 10px; }
+.pv-track { fill: none; stroke: var(--track); stroke-width: 3; }
+.pv-arc { fill: none; stroke: var(--accent); stroke-width: 3; stroke-linecap: round; }
+.pv-track-fill { fill: var(--track); }
+.pv-fill { fill: var(--accent); }
+[data-theme="falling"] .pv-arc { stroke: #FFE066; }
+[data-theme="falling"] .pv-fill { fill: #FFE066; }
+
+/* theme swatches carry their own data-theme, so the tokens resolve to
+   that theme regardless of what the page is currently using */
+.swatch {
+  font-family: var(--clock-font);
+  font-size: var(--fs-lg);
+  font-weight: var(--clock-weight);
+  letter-spacing: -.02em;
+  font-variant-numeric: tabular-nums;
+  background-color: var(--bg);
+  background-image: var(--page-glow);
+  color: var(--text);
+  box-shadow: inset 0 0 0 1px var(--border);
+}
+.swatch[data-theme="linear"] {
+  color: transparent;
+  background-image: var(--clock-fill), var(--page-glow);
+  -webkit-background-clip: text, border-box;
+  background-clip: text, border-box;
+}
+.swatch[data-theme="grayscale"] {
+  font-size: var(--fs-xl);
+  background-image:
+    radial-gradient(circle at 20% 25%, rgba(255, 255, 255, .22), transparent 45%),
+    radial-gradient(circle at 85% 85%, rgba(255, 255, 255, .12), transparent 40%);
+  background-size: 180% 180%;
+  background-position: 0 0;
+}
+.swatch[data-theme="falling"] {
+  position: relative;
+  isolation: isolate;
+}
+/* dots live on a 2-tile-tall layer so sliding it one tile loops seamlessly */
+.swatch[data-theme="falling"]::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -100%;
+  height: 200%;
+  z-index: -1;
+  background-image:
+    radial-gradient(circle at 14% 22%, #FF6B6B 0 4px, transparent 5px),
+    radial-gradient(circle at 80% 18%, #FFE066 0 6px, transparent 7px),
+    radial-gradient(circle at 30% 82%, #4D96FF 0 5px, transparent 6px),
+    radial-gradient(circle at 88% 74%, #6BCB77 0 3px, transparent 4px),
+    radial-gradient(circle at 62% 50%, #C77DFF 0 3px, transparent 4px),
+    radial-gradient(circle at 46% 12%, #FF7AC6 0 2px, transparent 3px);
+  background-size: 100% 50%;
+}
+
+/* ---- Buttons ---- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--s-2);
+  height: 48px;
+  padding: 0 var(--s-5);
+  font-size: var(--fs-md);
+  font-weight: 600;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  outline: none;
+  transition: background-color var(--dur) var(--ease), border-color var(--dur) var(--ease),
+              color var(--dur) var(--ease), transform var(--dur) var(--ease), opacity var(--dur) var(--ease);
+}
+.btn:focus-visible { box-shadow: 0 0 0 3px var(--focus); }
+.btn:active:not(:disabled) { transform: translateY(1px); }
+.btn:disabled { opacity: .45; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--accent);
+  color: var(--accent-text);
+}
+.btn-primary:hover:not(:disabled) { background: var(--accent-hover); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-ghost:hover { border-color: var(--border-strong); background: var(--surface-2); }
+
+.btn-block { width: 100%; }
+
+.btn svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.btn svg .filled { fill: currentColor; stroke: none; }
+
+.hint {
+  margin-top: calc(var(--s-6) * -1 + var(--s-3));
+  text-align: center;
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+}
+
+/* =========================================================
+   COUNTDOWN
+   ========================================================= */
+.timer {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  padding: var(--s-6) var(--s-4) var(--s-6);
+  overflow: hidden;
+}
+.timer.is-idle { cursor: none; }
+
+.stage {
+  place-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--s-4);
+  min-width: 0;
+}
+
+.phase {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.timer.is-done .phase { color: var(--text); }
+
+.clock-wrap {
+  position: relative;
+  display: grid;
+  place-items: center;
+}
+
+.clock {
+  --clock-size: min(30vw, 40vh);
+  font-family: var(--clock-font);
+  font-size: calc(var(--clock-size) * var(--clock-scale, 1));
+  font-weight: var(--clock-weight);
+  line-height: 1;
+  white-space: nowrap;
+  user-select: none;
+}
+.clock.is-long { font-size: calc(var(--clock-size) * var(--clock-scale, 1) * .8); }
+/* fixed-width digits so the clock never jitters, whatever the font */
+.clock .d,
+.clock .c {
+  position: relative;
+  display: inline-block;
+  text-align: center;
+}
+.clock .d { width: var(--digit-w); }
+.clock .c { width: var(--colon-w, .3em); top: -.06em; }
+.clock .g {
+  display: block;
+  color: var(--clock-color);
+  text-shadow: var(--clock-shadow);
+}
+[data-theme="linear"] .clock .g {
+  background-image: var(--clock-fill);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+/* digit change (Falling Colors only — JS adds these classes) */
+.clock .g-out {
+  position: absolute;
+  inset: 0;
+  animation: glyph-out 520ms cubic-bezier(.55, 0, .85, .45) forwards;
+}
+.clock .g-in { animation: glyph-in 640ms cubic-bezier(.2, 1.45, .45, 1) both; }
+@keyframes glyph-out {
+  to { opacity: 0; transform: translateY(.5em) rotate(var(--tilt, 8deg)) scale(.9); }
+}
+@keyframes glyph-in {
+  from { opacity: 0; transform: translateY(-.55em); }
+  55% { opacity: 1; }
+}
+
+.ring { display: none; }
+.bar { display: none; }
+
+/* -- Ring style -- */
+.stage[data-style="ring"] .clock-wrap {
+  /* as big as the width allows, leaving room above/below for label + dock */
+  --ring-size: clamp(160px, min(86vw, 100vh - 260px), 640px);
+  width: var(--ring-size);
+  height: var(--ring-size);
+}
+.stage[data-style="ring"] .clock { --clock-size: calc(var(--ring-size) * .22); }
+.stage[data-style="ring"] .ring {
+  display: block;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: rotate(-90deg);
+  overflow: visible;
+}
+.ring-track { fill: none; stroke: var(--track); stroke-width: 4; }
+.ring-progress {
+  fill: none;
+  stroke: var(--ring-stroke);
+  stroke-width: 6;
+  stroke-linecap: round;
+  stroke-dasharray: 100 100;
+  stroke-dashoffset: 0;
+  filter: var(--ring-glow);
+  transition: stroke-dashoffset 300ms linear;
+}
+
+/* -- Bar style -- */
+.stage[data-style="bar"] .clock { --clock-size: min(24vw, 32vh); }
+.stage[data-style="bar"] .bar {
+  display: block;
+  width: min(84vw, 960px);
+  height: 8px;
+  margin-top: var(--s-4);
+  border-radius: 999px;
+  background: var(--track);
+  overflow: hidden;
+}
+.bar-fill {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  background: var(--bar-fill);
+  transform-origin: left center;
+  transition: transform 300ms linear;
+}
+
+.meta {
+  font-size: var(--fs-md);
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+  text-align: center;
+}
+
+/* paused: the clock breathes */
+.timer.is-paused .clock { animation: breathe 1.8s var(--ease) infinite; }
+@keyframes breathe { 50% { opacity: .35; } }
+
+.timer.is-done .clock { animation: pop 700ms var(--ease) 2; }
+@keyframes pop { 50% { opacity: .4; transform: scale(.98); } }
+
+/* ---- Dock (controls) ---- */
+.dock {
+  display: grid;
+  justify-items: center;
+  gap: var(--s-4);
+  transition: opacity 400ms var(--ease);
+}
+.timer.is-idle .dock:not(:focus-within) { opacity: 0; pointer-events: none; }
+
+.controls,
+.done-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: var(--s-3);
+}
+
+.btn-icon {
+  width: 48px;
+  height: 48px;
+  padding: 0;
+  border-radius: 50%;
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text);
+}
+.btn-icon:hover { border-color: var(--border-strong); }
+[data-theme="falling"] .btn-icon {
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+.btn-play {
+  width: 64px;
+  height: 64px;
+  padding: 0;
+  border-radius: 50%;
+}
+.btn-play svg { width: 24px; height: 24px; stroke-width: 2.5; }
+.btn-play .icon-play { display: none; }
+.timer.is-paused .btn-play .icon-play { display: block; }
+.timer.is-paused .btn-play .icon-pause { display: none; }
+
+#fs-btn .icon-shrink { display: none; }
+#fs-btn[aria-pressed="true"] .icon-shrink { display: block; }
+#fs-btn[aria-pressed="true"] .icon-expand { display: none; }
+
+.keys {
+  font-size: var(--fs-xs);
+  color: var(--text-muted);
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: var(--s-1) var(--s-2);
+}
+.keys kbd:not(:first-child) { margin-left: var(--s-2); }
+.timer.is-done .keys { visibility: hidden; }
+@media (hover: none) { .keys { display: none; } }
+
+/* =========================================================
+   FALLING COLORS — MOTION
+   Decoration layered on the base theme. All of it is switched
+   off by prefers-reduced-motion (bottom of file).
+   ========================================================= */
+@property --glow {
+  syntax: "<color>";
+  inherits: false;
+  initial-value: #FF6B6B;
+}
+@keyframes glow-cycle {
+  0%, 100% { --glow: #FF6B6B; }
+  17% { --glow: #FFB84D; }
+  33% { --glow: #FFE066; }
+  50% { --glow: #6BCB77; }
+  67% { --glow: #4D96FF; }
+  83% { --glow: #9B7BFF; }
+}
+
+/* a slow aurora drifting behind the falling shapes */
+[data-theme="falling"] body::before {
+  content: "";
+  position: fixed;
+  inset: -25%;
+  pointer-events: none;
+  background:
+    radial-gradient(30% 28% at 22% 30%, rgba(255, 107, 107, .20), transparent 70%),
+    radial-gradient(28% 32% at 78% 26%, rgba(77, 150, 255, .18), transparent 70%),
+    radial-gradient(34% 30% at 58% 80%, rgba(155, 123, 255, .22), transparent 70%),
+    radial-gradient(22% 22% at 30% 78%, rgba(255, 224, 102, .10), transparent 70%);
+  animation: aurora 26s ease-in-out infinite alternate;
+}
+@keyframes aurora {
+  0%   { transform: translate3d(-3%, -2%, 0) rotate(0deg) scale(1); }
+  50%  { transform: translate3d(4%, 3%, 0) rotate(10deg) scale(1.08); }
+  100% { transform: translate3d(-2%, 5%, 0) rotate(-8deg) scale(1.03); }
+}
+
+/* setup content and the countdown "fall into place" — only when a screen
+   appears (JS adds .enter), never on a theme switch */
+[data-theme="falling"] .enter .card > *,
+[data-theme="falling"] .enter .stage > * {
+  animation: drop-in 700ms cubic-bezier(.22, 1.35, .4, 1) both;
+}
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .card > :nth-child(2) { animation-delay: 60ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .card > :nth-child(3) { animation-delay: 120ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .card > :nth-child(4) { animation-delay: 180ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .card > :nth-child(5) { animation-delay: 240ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .card > :nth-child(6) { animation-delay: 300ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .stage > :nth-child(2) { animation-delay: 80ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .stage > :nth-child(3) { animation-delay: 160ms; }
+:is([data-theme="falling"], [data-theme="grayscale"]) .enter .stage > :nth-child(4) { animation-delay: 220ms; }
+@keyframes drop-in {
+  from { opacity: 0; transform: translateY(-24px); }
+}
+
+/* the mark keeps turning */
+[data-theme="falling"] .brand-mark { animation: spin 12s linear infinite; }
+@keyframes spin { to { transform: rotate(1turn); } }
+
+/* preview swatch: dots fall while hovered, or while the theme is on */
+html[data-theme="falling"] .swatch[data-theme="falling"]::before,
+.option:hover .swatch[data-theme="falling"]::before {
+  animation: swatch-fall 5s linear infinite;
+}
+@keyframes swatch-fall { to { transform: translateY(50%); } }
+
+/* selected option + primary buttons glow through the spectrum */
+[data-theme="falling"] .option input:checked + .option-body {
+  box-shadow: inset 0 0 0 1px var(--accent), 0 0 24px -4px var(--glow);
+  animation: glow-cycle 6s linear infinite;
+}
+[data-theme="falling"] .option input:checked:focus-visible + .option-body {
+  box-shadow: inset 0 0 0 1px var(--accent), 0 0 0 3px var(--focus), 0 0 24px -4px var(--glow);
+}
+[data-theme="falling"] .btn-primary {
+  box-shadow: 0 8px 32px -6px var(--glow);
+  animation: glow-cycle 6s linear infinite;
+}
+[data-theme="falling"] .btn-primary:focus-visible {
+  box-shadow: 0 0 0 3px var(--focus), 0 8px 32px -6px var(--glow);
+}
+[data-theme="falling"] .enter .card > .btn-primary {
+  animation: drop-in 700ms cubic-bezier(.22, 1.35, .4, 1) 240ms both, glow-cycle 6s linear infinite;
+}
+[data-theme="falling"] .btn-primary:disabled { animation: none; box-shadow: none; }
+
+/* progress colors keep flowing */
+[data-theme="falling"] .ring-progress { animation: hue-flow 14s linear infinite; }
+@keyframes hue-flow {
+  from { filter: hue-rotate(0deg); }
+  to { filter: hue-rotate(360deg); }
+}
+[data-theme="falling"] .bar-fill {
+  background: linear-gradient(90deg, #FF6B6B, #FFB84D, #FFE066, #6BCB77, #4D96FF, #9B7BFF, #FF7AC6, #FF6B6B) 0 0 / 200% 100%;
+  animation: flow 6s linear infinite;
+}
+@keyframes flow { to { background-position: 200% 0; } }
+
+/* =========================================================
+   GRAYSCALE — MOTION
+   Film-like: drifting light, flickering grain, things that
+   develop out of a blur. Also off under reduced motion.
+   ========================================================= */
+
+/* two soft light blobs that drift and stretch very slowly */
+[data-theme="grayscale"] .fx {
+  display: block;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+[data-theme="grayscale"] .fx::before,
+[data-theme="grayscale"] .fx::after {
+  content: "";
+  position: absolute;
+  width: 80vmax;
+  height: 80vmax;
+  border-radius: 50%;
+}
+[data-theme="grayscale"] .fx::before {
+  left: -25vmax;
+  top: -40vmax;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .15), transparent);
+  animation: blob-a 30s ease-in-out infinite alternate;
+}
+[data-theme="grayscale"] .fx::after {
+  right: -30vmax;
+  bottom: -45vmax;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, .10), transparent);
+  animation: blob-b 38s ease-in-out infinite alternate;
+}
+@keyframes blob-a {
+  50%  { transform: translate(25vw, 20vh) scale(1.15, .9) rotate(40deg); }
+  100% { transform: translate(8vw, 42vh) scale(.9, 1.12) rotate(-20deg); }
+}
+@keyframes blob-b {
+  50%  { transform: translate(-30vw, -15vh) scale(1.2, 1); }
+  100% { transform: translate(-12vw, -36vh) scale(.95, 1.15); }
+}
+
+/* film grain over everything, jittering a few frames per second */
+[data-theme="grayscale"] body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 10;
+  pointer-events: none;
+  opacity: .07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 900ms steps(5) infinite;
+}
+@keyframes grain {
+  0%   { transform: translate(0, 0); }
+  20%  { transform: translate(-3%, 2%); }
+  40%  { transform: translate(2%, -4%); }
+  60%  { transform: translate(-4%, -1%); }
+  80%  { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* content develops out of a blur (when a screen appears, see .enter) */
+[data-theme="grayscale"] .enter .card > *,
+[data-theme="grayscale"] .enter .stage > * {
+  animation: develop 900ms cubic-bezier(.2, .7, .2, 1) both;
+}
+@keyframes develop {
+  from { opacity: 0; filter: blur(10px); transform: translateY(10px); }
+}
+
+/* digits roll up through a blur */
+[data-theme="grayscale"] .clock .g-out {
+  animation: roll-out 600ms cubic-bezier(.6, 0, .4, 1) forwards;
+}
+[data-theme="grayscale"] .clock .g-in {
+  animation: roll-in 600ms cubic-bezier(.6, 0, .4, 1) both;
+}
+@keyframes roll-out { to   { opacity: 0; transform: translateY(-.32em); filter: blur(.04em); } }
+@keyframes roll-in  { from { opacity: 0; transform: translateY(.32em);  filter: blur(.04em); } }
+
+/* mark turns, swatch light drifts */
+[data-theme="grayscale"] .brand-mark { animation: spin 14s linear infinite; }
+html[data-theme="grayscale"] .swatch[data-theme="grayscale"],
+.option:hover .swatch[data-theme="grayscale"] {
+  animation: swatch-drift 8s ease-in-out infinite alternate;
+}
+@keyframes swatch-drift { to { background-position: 100% 100%; } }
+
+/* a light sheen sweeps across primary buttons */
+[data-theme="grayscale"] .btn-primary {
+  position: relative;
+  overflow: hidden;
+}
+[data-theme="grayscale"] .btn-primary::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, transparent 30%, rgba(255, 255, 255, .95) 50%, transparent 70%);
+  transform: translateX(-100%);
+  animation: sheen 3.6s cubic-bezier(.5, 0, .5, 1) infinite;
+  pointer-events: none;
+}
+[data-theme="grayscale"] .btn-primary:disabled::after { display: none; }
+@keyframes sheen { 45%, 100% { transform: translateX(100%); } }
+
+/* ring breathes, bar shimmers */
+[data-theme="grayscale"] .ring-progress {
+  animation: ring-breathe 4s ease-in-out infinite alternate;
+}
+@keyframes ring-breathe {
+  from { filter: drop-shadow(0 0 2px rgba(255, 255, 255, .2)); }
+  to   { filter: drop-shadow(0 0 14px rgba(255, 255, 255, .65)); }
+}
+[data-theme="grayscale"] .bar-fill {
+  background:
+    linear-gradient(100deg, transparent 20%, rgba(255, 255, 255, .9) 50%, transparent 80%) -100% 0 / 40% 100% no-repeat,
+    linear-gradient(90deg, #4A4A4A, #F2F2F2);
+  animation: shimmer 2.8s cubic-bezier(.5, 0, .5, 1) infinite;
+}
+@keyframes shimmer {
+  0%       { background-position: -100% 0, 0 0; }
+  70%, 100% { background-position: 200% 0, 0 0; }
+}
+
+/* session complete: soft rings ripple out from the clock */
+[data-theme="grayscale"] .timer.is-done .clock-wrap::before,
+[data-theme="grayscale"] .timer.is-done .clock-wrap::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 40vmin;
+  height: 40vmin;
+  margin: -20vmin 0 0 -20vmin;
+  border: 1px solid rgba(255, 255, 255, .55);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: -1;
+  animation: ripple 2.4s cubic-bezier(.2, .7, .2, 1) 3 both;
+}
+[data-theme="grayscale"] .timer.is-done .clock-wrap::after { animation-delay: .7s; }
+@keyframes ripple {
+  from { transform: scale(.3); opacity: 1; }
+  to   { transform: scale(3); opacity: 0; }
+}
+
+/* paused → the background holds still, like a paused film frame */
+html:has(.timer.is-paused) body::before,
+html:has(.timer.is-paused) body::after,
+html:has(.timer.is-paused) .fx::before,
+html:has(.timer.is-paused) .fx::after {
+  animation-play-state: paused;
+}
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 520px) {
+  .setup { padding: var(--s-4); align-items: start; }
+  .card { padding: var(--s-5); gap: var(--s-5); }
+  .hint { margin-top: calc(var(--s-5) * -1 + var(--s-3)); }
+  .options { grid-template-columns: 1fr; gap: var(--s-2); }
+  .option-body {
+    grid-template-columns: 88px 1fr;
+    align-items: center;
+    padding: var(--s-2);
+  }
+  .swatch { font-size: var(--fs-md); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+  }
+  .timer.is-paused .clock { opacity: .5; }
+}
